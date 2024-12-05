@@ -1,3 +1,5 @@
+package br.uepa.jflix.modelos;
+
 public class Filme {
     ////////////////////////////////////////////////
     // ATRIBUTOS
@@ -7,9 +9,10 @@ public class Filme {
     private boolean incluidoNoPlano;
     private double notaDoFilme;
     private int avaliacao;
-    private int totalDeAvaliacoes;
+    private int qtdDeAvaliacoes;
     private String sinopse;
     private int duracaoEmMinutos;
+    private double somaNotaAvaliacao;
 
 
     ////////////////////////////////////////////////
@@ -17,20 +20,44 @@ public class Filme {
     ///////////////////////////////////////////////
 
     // construtor
-    public Filme(String nomeDoFilme, int anoLancamento, boolean incluidoNoPlano, double notaDoFilme, int avaliacao, int totalDeAvaliacoes, String sinopse, int duracaoEmMinutos) {
+    public Filme(String nomeDoFilme, int anoLancamento, boolean incluidoNoPlano, double notaDoFilme, int avaliacao, int qtdDeAvaliacoes, String sinopse, int duracaoEmMinutos) {
         this.nomeDoFilme = nomeDoFilme;
         this.anoLancamento = anoLancamento;
         this.incluidoNoPlano = incluidoNoPlano;
         this.notaDoFilme = notaDoFilme;
         this.avaliacao = avaliacao;
-        this.totalDeAvaliacoes = totalDeAvaliacoes;
+        this.qtdDeAvaliacoes = qtdDeAvaliacoes;
         this.sinopse = sinopse;
         this.duracaoEmMinutos = duracaoEmMinutos;
+        this.somaNotaAvaliacao = 0;
     }
 
     // serialize method
     public String serialize() {
-        return "{\"nomeDoFilme\": \"" + this.nomeDoFilme + "\", \"anoLancamento\": " + this.anoLancamento + ", \"incluidoNoPlano\": " + this.incluidoNoPlano + ", \"notaDoFilme\": " + this.notaDoFilme + ", \"avaliacao\": " + this.avaliacao + ", \"totalDeAvaliacoes\": " + this.totalDeAvaliacoes + ", \"sinopse\": \"" + this.sinopse + "\", \"duracaoEmMunitos\": " + this.duracaoEmMinutos + "}";
+        String message =  String.format("""
+                {
+                    "nomeDoFilme": "%s",
+                    "anoLancamento": "%d",
+                    "incluidoNoPlano": "%b",
+                    "notaDoFilme": "%f",
+                    "avaliacao": "%d",
+                    "qtdDeAvaliacoes": "%d",
+                    "sinopse": "%s",
+                    "duracaoEmMunitos": "%d"
+                  };
+                """, this.nomeDoFilme, this.anoLancamento, this.incluidoNoPlano, this.notaDoFilme, this.avaliacao, this.qtdDeAvaliacoes, this.sinopse, this.duracaoEmMinutos);
+        message.replaceAll("\\s+", " ");
+
+        return message;
+    }
+
+    public void avalia(double notaDoFilme) {
+        somaNotaAvaliacao += notaDoFilme;
+        qtdDeAvaliacoes++;
+    }
+
+    public double mediaNotas() {
+        return somaNotaAvaliacao/qtdDeAvaliacoes;
     }
 
     // set & get
@@ -74,12 +101,12 @@ public class Filme {
         return this.avaliacao;
     }
 
-    public void setTotalDeAvaliacoes(int total) {
-        this.totalDeAvaliacoes = total;
+    public void setQtdDeAvaliacoes(int total) {
+        this.qtdDeAvaliacoes = total;
     }
 
-    public int getTotalDeAvaliacoes() {
-        return this.totalDeAvaliacoes;
+    public int getQtdDeAvaliacoes() {
+        return this.qtdDeAvaliacoes;
     }
 
     public void setSinopse(String sinopse) {
