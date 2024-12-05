@@ -11,6 +11,7 @@ public class Filme {
     private String sinopse;
     private int duracaoEmMinutos;
 
+
     ////////////////////////////////////////////////
     // METODOS
     ///////////////////////////////////////////////
@@ -51,6 +52,10 @@ public class Filme {
 
     public void setIncluidoNoPlano(boolean incluido) {
         this.incluidoNoPlano = incluido;
+    }
+
+    public boolean getIncluidoNoPlano() {
+        return this.incluidoNoPlano;
     }
 
     public void setNotaDoFilme(double nota) {
