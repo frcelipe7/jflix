@@ -1,10 +1,6 @@
-package br.uepa.jflix.modelos;
+package br.uepa.jflix.models;
 
 public class Titulo {
-    ////////////////////////////////////////////////
-    // ATRIBUTOS
-    ///////////////////////////////////////////////
-
     private String nomeDoTitulo;
     private int anoLancamento = 0;
     private boolean incluidoNoPlano;
@@ -15,24 +11,7 @@ public class Titulo {
     private int duracaoEmMinutos;
     private double somaNotaAvaliacao;
 
-    ////////////////////////////////////////////////
-    // METODOS
-    ///////////////////////////////////////////////
-
-    // construtor
-    public Titulo(String nomeDoTitulo, int anoLancamento, boolean incluidoNoPlano, double notaDoTitulo, int avaliacao, int qtdDeAvaliacoes, String sinopse, int duracaoEmMinutos) {
-        this.nomeDoTitulo = nomeDoTitulo;
-        this.anoLancamento = anoLancamento;
-        this.incluidoNoPlano = incluidoNoPlano;
-        this.notaDoTitulo = notaDoTitulo;
-        this.avaliacao = avaliacao;
-        this.qtdDeAvaliacoes = qtdDeAvaliacoes;
-        this.sinopse = sinopse;
-        this.duracaoEmMinutos = duracaoEmMinutos;
-        this.somaNotaAvaliacao = 0;
-    }
-
-    public String display() {
+    public String showInfo() {
         String message =  String.format("""
                     Nome: %s,
                     Ano de Lançamento: %d,

@@ -1,5 +1,5 @@
-import br.uepa.jflix.modelos.Filme;
-import br.uepa.jflix.modelos.Serie;
+import br.uepa.jflix.models.Filme;
+import br.uepa.jflix.models.Serie;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         ArrayList<Filme> catalogoFilme = new ArrayList<Filme>();
+        ArrayList<Serie> catalogoSerie = new ArrayList<Serie>();
 
         int op = 0;
         Scanner userOp = new Scanner(System.in);
@@ -31,7 +32,7 @@ public class Main {
                 case 1:
                     System.out.println("\n=-=-=-=-=-=-=-=-=-=-=-=-=\nCadastro de filme\n=-=-=-=-=-=-=-=-=-=-=-=-=\n");
 
-                    Filme filme = new Filme("Default", 2000, false, 0.0, 0, 0, "Default", 0);
+                    Filme filme = new Filme();
 
                     System.out.println("Insira o nome do filme: ");
                     String nome = userInputFilme.nextLine();
@@ -56,7 +57,9 @@ public class Main {
 
                     catalogoFilme.add(filme);
 
-                    System.out.println(filme.serialize());
+                    System.out.println("\n=-=-=-=-=-=-=-=-=-=-=-=-=\nExibindo informações do filme\n=-=-=-=-=-=-=-=-=-=-=-=-=\n");
+
+                    System.out.println(filme.showInfo());
 
                     break;
                 case 2:
@@ -67,31 +70,33 @@ public class Main {
 
                     int escolhaFilme = userInputFilme.nextInt();
 
-                    System.out.println(catalogoFilme.get(escolhaFilme).display());
-
-                    /*
                     System.out.println("\n=-=-=-=-=-=-=-=-=-=-=-=-=\nExibindo informações do filme\n=-=-=-=-=-=-=-=-=-=-=-=-=\n");
-                    System.out.println("Nome do filme: " + filme.getNomeDoTitulo());
-                    System.out.println("Ano de lançamento: " + filme.getAnoLancamento());
-                    System.out.println("Influido no plano: " + filme.isIncluidoNoPlano());
-                    System.out.println("Nota do filme: " + filme.getNotaDoTitulo());
-                    System.out.println("Avaliação: " + filme.getAvaliacao());
-                    System.out.println("Total de avaliações: " + filme.getQtdDeAvaliacoes());
-                    System.out.println("Sinopse: " + filme.getSinopse());
-                    System.out.println("Duração em minutos: " + filme.getDuracaoEmMinutos());
-                    System.out.println("Média: " + filme.mediaNotas());
-                    break;
+                    System.out.println(catalogoFilme.get(escolhaFilme).showInfo());
 
-                     */
+                    break;
                 case 3:
-                    /*
+                    System.out.println("Você deseja avaliar qual filme?");
+                    for (Filme iFilme : catalogoFilme) {
+                        System.out.println(String.format("[%d] - %s", catalogoFilme.indexOf(iFilme), iFilme.getNomeDoTitulo()));
+                    }
+
+                    int filmeEscolhido = userInputFilme.nextInt();
+                    filme = catalogoFilme.get(filmeEscolhido);
+
                     System.out.println("\n=-=-=-=-=-=-=-=-=-=-=-=-=\nAvaliando filme\n=-=-=-=-=-=-=-=-=-=-=-=-=\n");
                     System.out.println("Insira a nota: ");
                     double nota = userInputFilme.nextDouble();
                     filme.avalia(nota);
+
+                    System.out.println("\n=-=-=-=-=-=-=-=-=-=-=-=-=\nExibindo informações do filme\n=-=-=-=-=-=-=-=-=-=-=-=-=\n");
+                    System.out.println(filme.showInfo());
                     break;
 
-                     */
+                case 4:
+                    System.out.println("\n=-=-=-=-=-=-=-=-=-=-=-=-=\nCadastro de série\n=-=-=-=-=-=-=-=-=-=-=-=-=\n");
+                    Serie serie = new Serie();
+                case 5:
+                case 6:
             }
         }
     }
