@@ -1,11 +1,24 @@
 package br.uepa.jflix.models;
 import br.uepa.jflix.utils.Classificavel;
+import br.uepa.jflix.utils.ClassificacaoIndicativa;
 
-public class Episodio implements Classificavel {
+import static br.uepa.jflix.models.Colors.*;
+
+public class Episodio implements Classificavel, ClassificacaoIndicativa {
     private int numeroEpisodio;
     private String nome;
     private Serie serie;
     private int totalVisualizacoes;
+    private int classificacaoIndicativaEpisodio = 16;
+
+    public int getClassificacaoIndicativaEpisodio() {
+        return classificacaoIndicativaEpisodio;
+    }
+
+    public void setClassificacaoIndicativaEpisodio(int classificacaoIndicativaEpisodio) {
+        this.classificacaoIndicativaEpisodio = classificacaoIndicativaEpisodio;
+    }
+
 
     public void setNumeroEpisodio(int numeroEpisodio) {
         this.numeroEpisodio = numeroEpisodio;
@@ -45,5 +58,9 @@ public class Episodio implements Classificavel {
             return 4;
         }
         return 2;
+    }
+
+    public boolean verificarPodeAssistir(Usuario user) {
+        return podeAssistir(user, this.getClassificacaoIndicativaEpisodio(), this.getNome());
     }
 }

@@ -10,6 +10,7 @@ public class Titulo {
     private String sinopse;
     private int duracaoEmMinutos;
     private double somaNotaAvaliacao;
+    private int classificacaoIndicativa;
 
     public String showInfo() {
         String message =  String.format("""
@@ -18,10 +19,11 @@ public class Titulo {
                     Incluído no Plano: %b,
                     Nota: %f,
                     Avaliação: %d,
+                    Soma avaliações: %f,
                     Quantidade de Avaliações: %d,
                     Sinopse: %s,
                     Duração em Minutos: %d
-                """, this.nomeDoTitulo, this.anoLancamento, this.incluidoNoPlano, this.notaDoTitulo, this.avaliacao, this.qtdDeAvaliacoes, this.sinopse, this.duracaoEmMinutos);
+                """, this.nomeDoTitulo, this.anoLancamento, this.incluidoNoPlano, this.notaDoTitulo, this.avaliacao, this.somaNotaAvaliacao, this.qtdDeAvaliacoes, this.sinopse, this.duracaoEmMinutos);
 
         message = message.replaceAll(" {4}", "");
 
@@ -48,7 +50,7 @@ public class Titulo {
     }
 
     public void avalia(double notaDoTitulo) {
-        somaNotaAvaliacao += notaDoTitulo;
+        this.somaNotaAvaliacao = this.somaNotaAvaliacao + notaDoTitulo;
         qtdDeAvaliacoes++;
     }
 
@@ -119,5 +121,13 @@ public class Titulo {
 
     public int getDuracaoEmMinutos() {
         return this.duracaoEmMinutos;
+    }
+
+    public int getClassificacaoIndicativa() {
+        return this.classificacaoIndicativa;
+    }
+
+    public void setClassificacaoIndicativa(int classificacaoIndicativa) {
+        this.classificacaoIndicativa = classificacaoIndicativa;
     }
 }

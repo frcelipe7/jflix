@@ -1,7 +1,10 @@
 package br.uepa.jflix.models;
 import br.uepa.jflix.utils.Classificavel;
+import br.uepa.jflix.utils.ClassificacaoIndicativa;
 
-public class Filme extends Titulo implements Classificavel {
+import static br.uepa.jflix.models.Colors.*;
+
+public class Filme extends Titulo implements Classificavel, ClassificacaoIndicativa {
     private String diretor;
 
     public void setDiretor(String diretor) {
@@ -15,5 +18,9 @@ public class Filme extends Titulo implements Classificavel {
     @Override
     public int getClassificacao() {
         return (int) (mediaNotas()/2);
+    }
+
+    public boolean verificarPodeAssistir(Usuario user) {
+        return podeAssistir(user, this.getClassificacaoIndicativa(), this.getNomeDoTitulo());
     }
 }

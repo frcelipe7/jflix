@@ -1,14 +1,62 @@
 import br.uepa.jflix.models.Filme;
 import br.uepa.jflix.models.Serie;
+import br.uepa.jflix.models.Usuario;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 
 public class Main {
     public static void main(String[] args) {
         ArrayList<Filme> catalogoFilme = new ArrayList<Filme>();
         ArrayList<Serie> catalogoSerie = new ArrayList<Serie>();
 
+        // Instância de um filme
+        Filme meuFilme = new Filme();
+        meuFilme.setNomeDoTitulo("Gladiador");
+        meuFilme.setAnoLancamento(2000);
+        meuFilme.setIncluidoNoPlano(true);
+        meuFilme.setDuracaoEmMinutos(240);
+        meuFilme.setSinopse("""
+                O general que virou escravo...
+                O escravo que virou Gladiador...
+                Gladiador que desafiou o império.""");
+        meuFilme.avalia(3.2);
+        meuFilme.avalia(10);
+        meuFilme.avalia(6);
+
+        // Adicionando no catalogo
+        catalogoFilme.add(meuFilme);
+
+        // Instância de uma série
+        Serie serie1 = new Serie();
+        serie1.setNomeDoTitulo("Breaking Bad");
+        serie1.setAnoLancamento(2014);
+        serie1.setTemporadas(6);
+        serie1.setMinutosPorEpisodio(40);
+        serie1.setEpisodiosPorTemporada(12);
+        serie1.setClassificacaoIndicativa(18);
+
+        // Adicionando no catalogo
+        catalogoSerie.add(serie1);
+
+        // Criando um usuário
+        LocalDate dataNascimento = LocalDate.of(2015, 2, 5);
+
+        Usuario user = new Usuario("Felipe", dataNascimento);
+        System.out.println(user.getIdade());
+
+        // Dizendo quais filmes do catálogo o usuário pode assistir
+        for (Filme filme : catalogoFilme) {
+            boolean podeAssistir = filme.verificarPodeAssistir(user);
+        }
+
+        // Dizendo quais séries do catálogo o usuário pode assistir
+        for (Serie serie : catalogoSerie) {
+            boolean podeAssistir = serie.verificarPodeAssistir(user);
+        }
+
+        // op é a variavel que define a operacao que o user vai realizar
         int op = 0;
         Scanner userOp = new Scanner(System.in);
         Scanner userInputFilme = new Scanner(System.in);
@@ -81,21 +129,32 @@ public class Main {
                     }
 
                     int filmeEscolhido = userInputFilme.nextInt();
-                    filme = catalogoFilme.get(filmeEscolhido);
+                    Filme filmeAvaliar = catalogoFilme.get(filmeEscolhido);
 
                     System.out.println("\n=-=-=-=-=-=-=-=-=-=-=-=-=\nAvaliando filme\n=-=-=-=-=-=-=-=-=-=-=-=-=\n");
                     System.out.println("Insira a nota: ");
                     double nota = userInputFilme.nextDouble();
-                    filme.avalia(nota);
+                    filmeAvaliar.avalia(nota);
 
                     System.out.println("\n=-=-=-=-=-=-=-=-=-=-=-=-=\nExibindo informações do filme\n=-=-=-=-=-=-=-=-=-=-=-=-=\n");
-                    System.out.println(filme.showInfo());
+                    System.out.println(filmeAvaliar.showInfo());
                     break;
 
                 case 4:
                     System.out.println("\n=-=-=-=-=-=-=-=-=-=-=-=-=\nCadastro de série\n=-=-=-=-=-=-=-=-=-=-=-=-=\n");
                     Serie serie = new Serie();
                 case 5:
+                    System.out.println("Você deseja ver os detalhes de qual serie?");
+                    for (Serie iSerie : catalogoSerie) {
+                        System.out.println(String.format("[%d] - %s", catalogoSerie.indexOf(iSerie), iSerie.getNomeDoTitulo()));
+                    }
+
+                    int escolhaSerie = userInputFilme.nextInt();
+
+                    System.out.println("\n=-=-=-=-=-=-=-=-=-=-=-=-=\nExibindo informações da serie\n=-=-=-=-=-=-=-=-=-=-=-=-=\n");
+                    System.out.println(catalogoFilme.get(escolhaSerie).showInfo());
+
+                    break;
                 case 6:
             }
         }
