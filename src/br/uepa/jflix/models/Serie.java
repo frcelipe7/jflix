@@ -9,6 +9,10 @@ public class Serie extends Titulo implements ClassificacaoIndicativa{
     private int episodiosPorTemporada;
     private int minutosPorEpisodio;
 
+    public Serie (String nomeDoTitulo, int anoLancamento, int classificacaoIndicativa) {
+        super(nomeDoTitulo, anoLancamento, classificacaoIndicativa);
+    }
+
     public int getTemporadas() {
         return temporadas;
     }

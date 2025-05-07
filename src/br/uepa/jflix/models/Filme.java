@@ -7,6 +7,10 @@ import static br.uepa.jflix.models.Colors.*;
 public class Filme extends Titulo implements Classificavel, ClassificacaoIndicativa {
     private String diretor;
 
+    public Filme(String nomeDoTitulo, int anoLancamento, int classificacaoIndicativa) {
+        super(nomeDoTitulo, anoLancamento, classificacaoIndicativa);
+    }
+
     public void setDiretor(String diretor) {
         this.diretor = diretor;
     }

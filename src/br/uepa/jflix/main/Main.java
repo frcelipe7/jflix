@@ -1,3 +1,5 @@
+package br.uepa.jflix.main;
+
 import br.uepa.jflix.models.Filme;
 import br.uepa.jflix.models.Serie;
 import br.uepa.jflix.models.Usuario;
@@ -5,8 +7,6 @@ import br.uepa.jflix.models.Usuario;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-//api_endpoint = "http://www.omdbapi.com/?i=tt3896198&apikey=11c74a87"
 
 public class Main {
     public static void main(String[] args) {

@@ -12,6 +12,35 @@ public class Titulo {
     private double somaNotaAvaliacao;
     private int classificacaoIndicativa;
 
+    public Titulo(String nomeDoTitulo, int anoLancamento, int classificacaoIndicativa) {
+        this.nomeDoTitulo = nomeDoTitulo;
+        this.anoLancamento = anoLancamento;
+        this.classificacaoIndicativa = classificacaoIndicativa;
+    }
+
+    private String charAniquilator(String receivedString) {
+        if (receivedString.equals("N/A")) {
+            return "-1";
+        }
+
+        StringBuilder finalString = new StringBuilder();
+
+        for (String i : receivedString.split("")) {
+            try {
+                Integer.parseInt(i);
+                finalString.append(i);
+            } catch (NumberFormatException e) {}
+        }
+
+        return finalString.toString();
+    }
+
+    public Titulo(TituloOmdb tituloOmdb) {
+        this.nomeDoTitulo = tituloOmdb.title();
+        this.anoLancamento = Integer.parseInt(charAniquilator(tituloOmdb.year()));
+        this.duracaoEmMinutos = Integer.parseInt(charAniquilator(tituloOmdb.runtime()));
+    }
+
     public String showInfo() {
         String message =  String.format("""
                     Nome: %s,
@@ -129,5 +158,10 @@ public class Titulo {
 
     public void setClassificacaoIndicativa(int classificacaoIndicativa) {
         this.classificacaoIndicativa = classificacaoIndicativa;
+    }
+
+    @Override
+    public String toString() {
+        return "Filme: " + this.getNomeDoTitulo() + " | " + "Ano de lançamento: " + this.getAnoLancamento() + " | " + "Duração: " + this.getDuracaoEmMinutos() + " | " ;
     }
 }
