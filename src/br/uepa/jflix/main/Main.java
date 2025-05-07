@@ -6,15 +6,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//api_endpoint = "http://www.omdbapi.com/?i=tt3896198&apikey=11c74a87"
+
 public class Main {
     public static void main(String[] args) {
         ArrayList<Filme> catalogoFilme = new ArrayList<Filme>();
         ArrayList<Serie> catalogoSerie = new ArrayList<Serie>();
 
         // Instância de um filme
-        Filme meuFilme = new Filme();
-        meuFilme.setNomeDoTitulo("Gladiador");
-        meuFilme.setAnoLancamento(2000);
+        Filme meuFilme = new Filme("Gladiador", 2000, 12);
         meuFilme.setIncluidoNoPlano(true);
         meuFilme.setDuracaoEmMinutos(240);
         meuFilme.setSinopse("""
@@ -29,13 +29,10 @@ public class Main {
         catalogoFilme.add(meuFilme);
 
         // Instância de uma série
-        Serie serie1 = new Serie();
-        serie1.setNomeDoTitulo("Breaking Bad");
-        serie1.setAnoLancamento(2014);
+        Serie serie1 = new Serie("Breaking Bad", 2014, 18);
         serie1.setTemporadas(6);
         serie1.setMinutosPorEpisodio(40);
         serie1.setEpisodiosPorTemporada(12);
-        serie1.setClassificacaoIndicativa(18);
 
         // Adicionando no catalogo
         catalogoSerie.add(serie1);
@@ -80,13 +77,15 @@ public class Main {
                 case 1:
                     System.out.println("\n=-=-=-=-=-=-=-=-=-=-=-=-=\nCadastro de filme\n=-=-=-=-=-=-=-=-=-=-=-=-=\n");
 
-                    Filme filme = new Filme();
 
                     System.out.println("Insira o nome do filme: ");
                     String nome = userInputFilme.nextLine();
 
                     System.out.println("Insira a sinopse do filme: ");
                     String sinopse = userInputFilme.nextLine();
+
+                    System.out.println("Insira a classificacao indicativa:  ");
+                    int classificacaoIndicativa = userInputFilme.nextInt();
 
                     System.out.println("Insira o ano de lançamento: ");
                     int ano = userInputFilme.nextInt();
@@ -97,8 +96,7 @@ public class Main {
                     System.out.println("Insira a duração em minutos:  ");
                     int duracao = userInputFilme.nextInt();
 
-                    filme.setNomeDoTitulo(nome);
-                    filme.setAnoLancamento(ano);
+                    Filme filme = new Filme(nome, ano, classificacaoIndicativa);
                     filme.setIncluidoNoPlano(incluido == 1);
                     filme.setSinopse(sinopse);
                     filme.setDuracaoEmMinutos(duracao);
@@ -142,7 +140,17 @@ public class Main {
 
                 case 4:
                     System.out.println("\n=-=-=-=-=-=-=-=-=-=-=-=-=\nCadastro de série\n=-=-=-=-=-=-=-=-=-=-=-=-=\n");
-                    Serie serie = new Serie();
+                    System.out.println("Insira o nome do filme: ");
+                    String nomeSerie = userInputFilme.nextLine();
+
+                    System.out.println("Insira o ano de lançamento: ");
+                    int anoSerie = userInputFilme.nextInt();
+
+                    System.out.println("Insira a classificacao indicativa:  ");
+                    int classificacaoIndicativaSerie = userInputFilme.nextInt();
+
+                    Serie serie = new Serie(nomeSerie, anoSerie, classificacaoIndicativaSerie);
+
                 case 5:
                     System.out.println("Você deseja ver os detalhes de qual serie?");
                     for (Serie iSerie : catalogoSerie) {
